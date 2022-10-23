@@ -46,3 +46,16 @@ The **STATION** table is described as follows:
 ```
 select count(CITY) - count(distinct (CITY)) from STATION;
 ```
+### 10. Query the two cities in **STATION** with the shortest and longest _CITY_ names, as well as their respective lengths (i.e.: number of characters in the name). If there is more than one smallest or largest city, choose the one that comes first when ordered alphabetically.
+-   limit N  : 返回 N 条记录
+-   offset M  : 跳过 M 条记录, 默认 M=0, 单独使用似乎不起作用
+-   limit N,M  : 相当于  **limit M offset N**  , 从第 N 条记录开始, 返回 M 条记录
+- SELECT ... FROM ... WHERE ... ORDER BY ... LIMIT ...
+
+```
+(Select CITY, length(CITY) from STATION
+order by length(CITY), CITY LIMIT 1)
+union 
+(Select CITY, length(CITY) from STATION
+order by length(CITY) DESC, CITY LIMIT 1)
+```
